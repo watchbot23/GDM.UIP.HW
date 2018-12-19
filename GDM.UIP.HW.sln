@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDM.HW1.VariablesTypesTask1", "GDM.HW1.VariablesTypesTask1\GDM.HW1.VariablesTypesTask1.csproj", "{A757442C-0877-4ADE-9D93-49A658909A98}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HW3", "HW3", "{3E7E3EC2-30B2-4915-AC87-AE0DE6E3BA5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDM.HW3.ConditionalsMethods", "GDM.HW3.ConditionalsMethods\GDM.HW3.ConditionalsMethods.csproj", "{955BED7B-DC04-4CC2-9277-3477053E274A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{A757442C-0877-4ADE-9D93-49A658909A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A757442C-0877-4ADE-9D93-49A658909A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A757442C-0877-4ADE-9D93-49A658909A98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{955BED7B-DC04-4CC2-9277-3477053E274A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{955BED7B-DC04-4CC2-9277-3477053E274A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{955BED7B-DC04-4CC2-9277-3477053E274A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{955BED7B-DC04-4CC2-9277-3477053E274A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{955BED7B-DC04-4CC2-9277-3477053E274A} = {3E7E3EC2-30B2-4915-AC87-AE0DE6E3BA5C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E001848-9ED7-47C1-87A7-9108FB5EEF43}
