@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AB94AA72-9C0C-4B31-B50C-DE235E9ECC60}</ProjectGuid>
+    <ProjectGuid>{0566729C-8917-4289-AE2F-FCBC421B2B06}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>GDM.HW3.ConditionalsMethods</RootNamespace>
     <AssemblyName>GDM.HW3.ConditionalsMethods</AssemblyName>
