@@ -45,7 +45,18 @@ namespace GDM.HW3.ConditionalsMethods
             {
                 Console.Write(fibArray[i] + " ");
             }
+            Console.WriteLine();
+            //2 variant
+            FibonacciVer2(0, 1, 1, fib);
+            Console.WriteLine();
 
+            //3 variant
+            int[] fibArr = new int[fib];
+            FibonacciVer3(0, 1, 1, fib, fibArr);
+            for (int i = 0; i < fibArr.Length; i++)
+            {
+                Console.Write(fibArr[i] + " ");
+            }
 
             //Task 4
             string task4 = "Task 4. ";
@@ -191,18 +202,34 @@ namespace GDM.HW3.ConditionalsMethods
          }
 
         //Task 3
-        static int Fibonachi(int n)
+        static int Fibonacci(int length)
         {
-            return n > 1 ? Fibonachi(n - 1) + Fibonachi(n - 2) : n;
+            return length > 1 ? Fibonacci(length - 1) + Fibonacci(length - 2) : length;
         }
-        static int[] FibonachiArray(int n)
+        static int[] FibonachiArray(int length)
         {
-            int[] tempArray = new int[n];
-            for (int i = 0; i < n; i++)
+            int[] tempArray = new int[length];
+            for (int i = 0; i < length; i++)
             {
-                tempArray[i] = Fibonachi(i);
+                tempArray[i] = Fibonacci(i);
             }
             return tempArray;
+        }
+        static void FibonacciVer2(int a, int b, int counter, int length)
+        {
+            if (counter <= length)
+            {
+                Console.Write(a + " ");
+                FibonacciVer2(b, a + b, counter + 1, length);
+            }
+        }
+        static void FibonacciVer3(int a, int b, int counter, int length, int[] arr)
+        {
+            if (counter <= length)
+            {
+                arr[counter - 1] = a;
+                FibonacciVer3(b, a + b, counter + 1, length, arr);
+            }
         }
 
         //Task 4
