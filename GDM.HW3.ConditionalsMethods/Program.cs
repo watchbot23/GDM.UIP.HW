@@ -183,20 +183,17 @@ namespace GDM.HW3.ConditionalsMethods
         //Task 2
         static double Factorial(double fac)
         {
-            if (fac == 0)
+            if (fac < 0)
             {
-                return 1;
+                return 0;
             }
-            else
-            {
-                return fac * Factorial(fac - 1);
-            }
-        }
+            return fac == 0 ? 1 : fac * Factorial(fac - 1);
+         }
 
         //Task 3
         static int Fibonachi(int n)
         {
-            return n = n > 1 ? Fibonachi(n - 1) + Fibonachi(n - 2) : n;
+            return n > 1 ? Fibonachi(n - 1) + Fibonachi(n - 2) : n;
         }
         static int[] FibonachiArray(int n)
         {
