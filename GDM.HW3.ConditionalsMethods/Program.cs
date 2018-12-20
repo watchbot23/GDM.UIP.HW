@@ -39,10 +39,11 @@ namespace GDM.HW3.ConditionalsMethods
             //Task 3
             string task3 = "Task 3. ";
             int fib = randomizer.Next(0, 30);
+            int[] fibArray = FibonachiArray(fib);
             Console.WriteLine(task3 + $"Последовательностью чисел Фибоначчи для {fib} является:");
-            for (int i = 0; i < fib; i++)
+            for (int i = 0; i < fibArray.Length; i++)
             {
-                Console.Write(Fibonachi(i) + " ");
+                Console.Write(fibArray[i] + " ");
             }
 
 
@@ -196,6 +197,15 @@ namespace GDM.HW3.ConditionalsMethods
         static int Fibonachi(int n)
         {
             return n = n > 1 ? Fibonachi(n - 1) + Fibonachi(n - 2) : n;
+        }
+        static int[] FibonachiArray(int n)
+        {
+            int[] tempArray = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                tempArray[i] = Fibonachi(i);
+            }
+            return tempArray;
         }
 
         //Task 4
