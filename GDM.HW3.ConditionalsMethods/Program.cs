@@ -220,10 +220,7 @@ namespace GDM.HW3.ConditionalsMethods
             {
                 return 30;
             }
-            else
-            {
                 return 31;
-            }
         }
 
         //Task 5
