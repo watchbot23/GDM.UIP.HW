@@ -169,7 +169,7 @@ namespace GDM.HW3.ConditionalsMethods
                     tempArray[i] = tempRes;
                     task[i] = $"Сколько будет {tempA} * {tempB}";
                 }
-                while (IsDupl(tempArray, tempRes, i));
+                while (IsArrayVeriableDuplicated(tempArray, tempRes, i));
             }
 
             for (int i = 0; i < task.Length; i++)
@@ -208,57 +208,58 @@ namespace GDM.HW3.ConditionalsMethods
         //Task 4
         static int DaysNumberInMonth(int month, int year)
         {
+            int days = 31;
             if (month == 2 && year % 4 == 0 && year % 100 != 0 || month == 2 && year % 100 == 0)
             {
-                return 29;
+                days = 29;
             }
             if (month == 2)
             {
-                return 28;
+                days = 28;
             }
             if (month % 2 == 1 && month < 7 || month > 8 && month % 2 == 1)
             {
-                return 30;
+                days = 30;
             }
-                return 31;
+                return days;
         }
 
         //Task 5
         static int[] ReccursiveQuickArraySort(int[] array, int firstArrayIndex, int lastArrayIndex)
         {
-            int f = firstArrayIndex;
-            int l = lastArrayIndex;
-            int mid = array[(f + l) / 2];
+            int first = firstArrayIndex;
+            int last = lastArrayIndex;
+            int mid = array[(first + last) / 2];
             do
             {
-                while (array[f] < mid)
+                while (array[first] < mid)
                 {
-                    ++f;
+                    ++first;
                 }
-                while (array[l] > mid)
+                while (array[last] > mid)
                 {
-                    --l;
+                    --last;
                 }
-                if (f <= l)
+                if (first <= last)
                 {
-                    if (f < l)
+                    if (first < last)
                     {
-                        int temp = array[f];
-                        array[f] = array[l];
-                        array[l] = temp;
+                        int temp = array[first];
+                        array[first] = array[last];
+                        array[last] = temp;
                     }
-                    ++f;
-                    --l;
+                    ++first;
+                    --last;
                 }
             }
-            while (f <= l);
-            if (firstArrayIndex < l)
+            while (first <= last);
+            if (firstArrayIndex < last)
             {
-                ReccursiveQuickArraySort(array, firstArrayIndex, l);
+                ReccursiveQuickArraySort(array, firstArrayIndex, last);
             }
-            if (f < lastArrayIndex)
+            if (first < lastArrayIndex)
             {
-                ReccursiveQuickArraySort(array, f, lastArrayIndex);
+                ReccursiveQuickArraySort(array, first, lastArrayIndex);
             }
             return array;
         }
@@ -300,7 +301,7 @@ namespace GDM.HW3.ConditionalsMethods
         }
 
         //Task 8
-        static bool IsDupl(int[] array, int veriable, int arrayIndex)
+        static bool IsArrayVeriableDuplicated(int[] array, int veriable, int arrayIndex)
         {
             bool temp = false;
             for (int i = 0; i < array.Length; i++)
@@ -308,7 +309,6 @@ namespace GDM.HW3.ConditionalsMethods
                 if (array[i] == veriable && arrayIndex != i)
                 {
                     temp = true;
-                    return temp;
                 }
             }
             return temp;
