@@ -8,135 +8,7 @@ namespace GDM.HW3.ConditionalsMethods
 {
     class Program
     {
-        //Task 2
-        static double Factorial(double fac)
-        {
-            if (fac == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return fac * Factorial(fac - 1);
-            }
-        }
 
-        //Task 3
-        static int Fibonachi(int n)
-        {
-            return n > 1 ? Fibonachi(n - 1) + Fibonachi(n - 2) : n;
-        }
-
-        //Task 4
-        static int DaysNumberInMonth(int month, int year)
-        {
-            if (month == 2 && year % 4 == 0 && year % 100 != 0 || month == 2 && year % 100 == 0)
-            {
-                return 29;
-            }
-            if (month == 2)
-            {
-                return 28;
-            }
-            if (month % 2 == 1 && month < 7 || month > 8 && month % 2 == 1)
-            {
-                return 30;
-            }
-            else
-            {
-                return 31;
-            }
-        }
-
-        //Task 5
-        static int[] ReccursiveQuickArraySort(int[] array, int firstArrayIndex, int lastArrayIndex)
-        {
-            int f = firstArrayIndex;
-            int l = lastArrayIndex;
-            int mid = array[(f + l) / 2];
-            do
-            {
-                while (array[f] < mid)
-                    ++f;
-                while (array[l] > mid)
-                    --l;
-                if (f <= l)
-                {
-                    if (f < l)
-                    {
-                        int temp = array[f];
-                        array[f] = array[l];
-                        array[l] = temp;
-                    }
-                    ++f;
-                    --l;
-                }
-            }
-            while (f <= l);
-            if (firstArrayIndex < l)
-            {
-                ReccursiveQuickArraySort(array, firstArrayIndex, l);
-            }
-            if (f < lastArrayIndex)
-            {
-                ReccursiveQuickArraySort(array, f, lastArrayIndex);
-            }
-            return array;
-        }
-
-        //Task 6
-        static int[] PutZeroBetweenMimMaxValueArray(int[] array)
-        {
-            int[] tempArray = (int[])array.Clone();
-            int[] sortedRandomArray = ReccursiveQuickArraySort(tempArray, 0, tempArray.Length - 1);
-            int min = 0;
-            int max = 0;
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (array[i] == sortedRandomArray[0])
-                {
-                    min = i;
-                }
-            }
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (array[i] == sortedRandomArray[sortedRandomArray.Length - 1])
-                {
-                    max = i;
-                }
-            }
-            if (min > max)
-            {
-                for (int i = max + 1; i < min; i++)
-                {
-                    array[i] = 0;
-                }
-            }
-            else
-            {
-                for (int i = min + 1; i < max; i++)
-                {
-                    array[i] = 0;
-                }
-            }
-            return array;
-        }
-
-        //Task 8
-        static bool IsDupl(int[] array, int veriable, int arrayIndex)
-        {
-            bool temp = false;
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (array[i] == veriable && arrayIndex != i)
-                {
-                    temp = true;
-                    return temp;
-                }
-            }
-            return temp;
-        }
         static void Main(string[] args)
         {
             Random randomizer = new Random();
@@ -148,7 +20,6 @@ namespace GDM.HW3.ConditionalsMethods
             while (eggs < eggsNumberInBox)
             {
                 eggs++;
-
             }
             Console.WriteLine(task1 + $"1. Количество яиц в лотке {eggs} шт.");
             int eggs2 = 10;
@@ -157,7 +28,6 @@ namespace GDM.HW3.ConditionalsMethods
             {
                 eggs--;
                 count++;
-
             } while (eggs != 0);
             Console.WriteLine(task1 + $"2. При наличии {eggs2} яиц в лотке, можно достать по 1 яйцу {count} раз");
 
@@ -169,12 +39,24 @@ namespace GDM.HW3.ConditionalsMethods
             //Task 3
             string task3 = "Task 3. ";
             int fib = randomizer.Next(0, 30);
+            int[] fibArray = FibonachiArray(fib);
             Console.WriteLine(task3 + $"Последовательностью чисел Фибоначчи для {fib} является:");
-            for (int i = 0; i < fib; i++)
+            for (int i = 0; i < fibArray.Length; i++)
             {
-                Console.Write(Fibonachi(i) + " ");
+                Console.Write(fibArray[i] + " ");
             }
+            Console.WriteLine();
+            //2 variant
+            FibonacciVer2(0, 1, 1, fib);
+            Console.WriteLine();
 
+            //3 variant
+            int[] fibArr = new int[fib];
+            FibonacciVer3(0, 1, 1, fib, fibArr);
+            for (int i = 0; i < fibArr.Length; i++)
+            {
+                Console.Write(fibArr[i] + " ");
+            }
 
             //Task 4
             string task4 = "Task 4. ";
@@ -243,7 +125,6 @@ namespace GDM.HW3.ConditionalsMethods
                         mainArray[i][j] = randomizer.Next(0, 9);
                         Console.Write(mainArray[i][j] + "\n");
                     }
-
                 }
             }
             Console.WriteLine("\n" + task7 + "2:");
@@ -278,7 +159,6 @@ namespace GDM.HW3.ConditionalsMethods
                     {
                         Console.Write(mainArray[i][j] + "\n");
                     }
-
                 }
             }
 
@@ -292,7 +172,6 @@ namespace GDM.HW3.ConditionalsMethods
             int tempRes = 0;
             for (int i = 0; i < task.Length; i++)
             {
-
                 do
                 {
                     tempA = randomizer.Next(2, 9);
@@ -301,7 +180,7 @@ namespace GDM.HW3.ConditionalsMethods
                     tempArray[i] = tempRes;
                     task[i] = $"Сколько будет {tempA} * {tempB}";
                 }
-                while (IsDupl(tempArray, tempRes, i));
+                while (IsArrayVeriableDuplicated(tempArray, tempRes, i));
             }
 
             for (int i = 0; i < task.Length; i++)
@@ -310,6 +189,156 @@ namespace GDM.HW3.ConditionalsMethods
             }
 
             Console.ReadLine();
+        }
+
+        //Task 2
+        static double Factorial(double fac)
+        {
+            if (fac < 0)
+            {
+                return 0;
+            }
+            return fac == 0 ? 1 : fac * Factorial(fac - 1);
+        }
+
+        //Task 3
+        static int Fibonacci(int length)
+        {
+            return length > 1 ? Fibonacci(length - 1) + Fibonacci(length - 2) : length;
+        }
+        static int[] FibonachiArray(int length)
+        {
+            int[] tempArray = new int[length];
+            for (int i = 0; i < length; i++)
+            {
+                tempArray[i] = Fibonacci(i);
+            }
+            return tempArray;
+        }
+        static void FibonacciVer2(int a, int b, int counter, int length)
+        {
+            if (counter <= length)
+            {
+                Console.Write(a + " ");
+                FibonacciVer2(b, a + b, counter + 1, length);
+            }
+        }
+        static void FibonacciVer3(int a, int b, int counter, int length, int[] arr)
+        {
+            if (counter <= length)
+            {
+                arr[counter - 1] = a;
+                FibonacciVer3(b, a + b, counter + 1, length, arr);
+            }
+        }
+
+        //Task 4
+        static int DaysNumberInMonth(int month, int year)
+        {
+            int days = 31;
+            if (month == 2 && year % 4 == 0 && year % 100 != 0 || month == 2 && year % 100 == 0)
+            {
+                days = 29;
+            }
+            if (month == 2)
+            {
+                days = 28;
+            }
+            if (month % 2 == 1 && month < 7 || month > 8 && month % 2 == 1)
+            {
+                days = 30;
+            }
+            return days;
+        }
+
+        //Task 5
+        static int[] ReccursiveQuickArraySort(int[] array, int firstArrayIndex, int lastArrayIndex)
+        {
+            int first = firstArrayIndex;
+            int last = lastArrayIndex;
+            int mid = array[(first + last) / 2];
+            do
+            {
+                while (array[first] < mid)
+                {
+                    ++first;
+                }
+                while (array[last] > mid)
+                {
+                    --last;
+                }
+                if (first <= last)
+                {
+                    if (first < last)
+                    {
+                        int temp = array[first];
+                        array[first] = array[last];
+                        array[last] = temp;
+                    }
+                    ++first;
+                    --last;
+                }
+            }
+            while (first <= last);
+            if (firstArrayIndex < last)
+            {
+                ReccursiveQuickArraySort(array, firstArrayIndex, last);
+            }
+            if (first < lastArrayIndex)
+            {
+                ReccursiveQuickArraySort(array, first, lastArrayIndex);
+            }
+            return array;
+        }
+
+        //Task 6
+        static int[] PutZeroBetweenMimMaxValueArray(int[] array)
+        {
+            int[] tempArray = (int[])array.Clone();
+            int[] sortedRandomArray = ReccursiveQuickArraySort(tempArray, 0, tempArray.Length - 1);
+            int min = 0;
+            int max = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == sortedRandomArray[0])
+                {
+                    min = i;
+                }
+                if (array[i] == sortedRandomArray[sortedRandomArray.Length - 1])
+                {
+                    max = i;
+                }
+            }
+            if (min > max)
+            {
+                for (int i = max + 1; i < min; i++)
+                {
+                    array[i] = 0;
+                }
+            }
+            else
+            {
+                for (int i = min + 1; i < max; i++)
+                {
+                    array[i] = 0;
+                }
+            }
+            return array;
+        }
+
+        //Task 8
+        static bool IsArrayVeriableDuplicated(int[] array, int veriable, int arrayIndex)
+        {
+            bool temp = false;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == veriable && arrayIndex != i)
+                {
+                    temp = true;
+                }
+            }
+            return temp;
         }
     }
 }
