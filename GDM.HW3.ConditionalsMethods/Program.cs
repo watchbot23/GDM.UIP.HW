@@ -146,22 +146,7 @@ namespace GDM.HW3.ConditionalsMethods
                     }
                 }
             }
-            //выводим на консоль отсортированный массив
-            for (int i = 0; i < mainArray.Length; i++)
-            {
-                for (int j = 0; j < mainArray[i].Length; j++)
-                {
-                    if (j != mainArray[i].Length - 1)
-                    {
-                        Console.Write(mainArray[i][j] + " ");
-                    }
-                    else
-                    {
-                        Console.Write(mainArray[i][j] + "\n");
-                    }
-                }
-            }
-
+            ConsoleWriteArraysArray(mainArray);
             //Task 8
             string task8 = "Task 8:";
             Console.WriteLine("\n" + task8 + "1:");
@@ -190,7 +175,6 @@ namespace GDM.HW3.ConditionalsMethods
 
             Console.ReadLine();
         }
-
         //Task 2
         static double Factorial(double fac)
         {
@@ -200,7 +184,6 @@ namespace GDM.HW3.ConditionalsMethods
             }
             return fac == 0 ? 1 : fac * Factorial(fac - 1);
         }
-
         //Task 3
         static int Fibonacci(int length)
         {
@@ -231,7 +214,6 @@ namespace GDM.HW3.ConditionalsMethods
                 FibonacciVer3(b, a + b, counter + 1, length, arr);
             }
         }
-
         //Task 4
         static int DaysNumberInMonth(int month, int year)
         {
@@ -250,7 +232,6 @@ namespace GDM.HW3.ConditionalsMethods
             }
             return days;
         }
-
         //Task 5
         static int[] ReccursiveQuickArraySort(int[] array, int firstArrayIndex, int lastArrayIndex)
         {
@@ -290,7 +271,6 @@ namespace GDM.HW3.ConditionalsMethods
             }
             return array;
         }
-
         //Task 6
         static int[] PutZeroBetweenMimMaxValueArray(int[] array)
         {
@@ -326,7 +306,24 @@ namespace GDM.HW3.ConditionalsMethods
             }
             return array;
         }
-
+        //Task 7
+        static void ConsoleWriteArraysArray(int[][] arraysArray)
+        {
+            for (int i = 0; i < arraysArray.Length; i++)
+            {
+                for (int j = 0; j < arraysArray[i].Length; j++)
+                {
+                    if (j != arraysArray[i].Length - 1)
+                    {
+                        Console.Write(arraysArray[i][j] + " ");
+                    }
+                    else
+                    {
+                        Console.Write(arraysArray[i][j] + "\n");
+                    }
+                }
+            }
+        }
         //Task 8
         static bool IsArrayVeriableDuplicated(int[] array, int veriable, int arrayIndex)
         {
