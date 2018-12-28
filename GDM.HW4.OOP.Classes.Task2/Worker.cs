@@ -14,12 +14,11 @@ namespace GDM.HW4.OOP.Classes.Task2
         }
         public string MiddleWorker(string agregat, int completeAgrigat)
         {
-            //string tempAgregat = agregat;
             for (int i = 0; i < 3; i++)
             {
                 if (completeAgrigat - agregat.Length != 0)
                 {
-                    agregat = agregat + "b";
+                    agregat += "b";
                 }
             }
             return agregat;
@@ -30,7 +29,7 @@ namespace GDM.HW4.OOP.Classes.Task2
             {
                 if (completeAgrigat - agregat.Length != 0)
                 {
-                    agregat = agregat + "c";
+                    agregat +="c";
                 }
             }
             return agregat;
