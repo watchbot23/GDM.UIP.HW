@@ -14,20 +14,13 @@ namespace GDM.HW4.OOP.Classes.Task2
             Worker bogdan = new Worker();
             Worker clark = new Worker();
             string agregat = "Agregat";
+            int completeAgrigat = 50;
 
-            for (int i = 0; agregat.Length < 50; i++)
+            for (int i = 0; agregat.Length < completeAgrigat; i++)
             {
-                if (50 - agregat.Length > 0) {
-                    agregat = anton.JuniorWorker(agregat);
-                }
-                if (50 - agregat.Length >= 3)
-                {
-                    agregat = bogdan.MiddleWorker(agregat);
-                }
-                if (50 - agregat.Length >= 5)
-                {
-                    agregat = clark.SeniorWorker(agregat);
-                }
+                agregat = anton.JuniorWorker(agregat);
+                agregat = bogdan.MiddleWorker(agregat, completeAgrigat);
+                agregat = clark.SeniorWorker(agregat, completeAgrigat);
                 Console.WriteLine(agregat);
             }
             Console.ReadLine();
