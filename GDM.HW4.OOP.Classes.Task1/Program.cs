@@ -10,36 +10,30 @@ namespace GDM.HW4.OOP.Classes.Task1
     {
         static void Main(string[] args)
         {
-            const string laptop = "Laptop";
-            const string server = "Server";
-            const string plazmTV = "PlasmTV";
-            const string ledTV = "LED TV";
-            const string pleyer = "Pleyer Device";
-            
             LapTop Acer = new LapTop("Acer", 65, 8, 2.1);
             LapTop MSI = new LapTop("MSI", 85, 16, 2.9);
-            Console.WriteLine(laptop + " 1:\n" + Acer.GetDescription());
-            Console.WriteLine(laptop + " 2:\n" + MSI.GetDescription());
+            Console.WriteLine(Acer.laptop + " 1:\n" + Acer.GetDescription());
+            Console.WriteLine(MSI.laptop + " 2:\n" + MSI.GetDescription());
 
             Server Intel = new Server("Intel", 200, 120, 8);
             Server AMD = new Server("Intel", 300, 140, 12);
-            Console.WriteLine(server + " 1:\n" + Intel.GetDescription());
-            Console.WriteLine(server + " 2:\n" + AMD.GetDescription());
+            Console.WriteLine(Intel.server + " 1:\n" + Intel.GetDescription());
+            Console.WriteLine(AMD.server + " 2:\n" + AMD.GetDescription());
 
             PlasmTV Samsung = new PlasmTV("Samsung", 300, 32, "1920x1080");
             PlasmTV LG = new PlasmTV("LG", 500, 50, "3840x2160");
-            Console.WriteLine(plazmTV + " 1:\n" + Samsung.GetDescription());
-            Console.WriteLine(plazmTV + " 2:\n" + LG.GetDescription());
+            Console.WriteLine(Samsung.plazmTV + " 1:\n" + Samsung.GetDescription());
+            Console.WriteLine(LG.plazmTV + " 2:\n" + LG.GetDescription());
 
             LEDTV Sharp = new LEDTV("Sharp", 350, 40, 60);
             LEDTV Xiaomi = new LEDTV("Xiaomi", 700, 65, 75);
-            Console.WriteLine(ledTV + " 1:\n" + Sharp.GetDescription());
-            Console.WriteLine(ledTV + " 2:\n" + Xiaomi.GetDescription());
+            Console.WriteLine(Sharp.ledTV + " 1:\n" + Sharp.GetDescription());
+            Console.WriteLine(Xiaomi.ledTV + " 2:\n" + Xiaomi.GetDescription());
 
-            PleyerDevice Sony = new PleyerDevice("Sharp", 350, true, true);
-            PleyerDevice Panasonic = new PleyerDevice("Xiaomi", 700, true, false);
-            Console.WriteLine(pleyer + " 1:\n" + Sony.GetDescription());
-            Console.WriteLine(pleyer + " 2:\n" + Panasonic.GetDescription());
+            PleyerDevice Sony = new PleyerDevice("Sharp", 350, "MP3, AVC");
+            PleyerDevice Panasonic = new PleyerDevice("Xiaomi", 700, "MP3, Flac");
+            Console.WriteLine(Sony.pleyer + " 1:\n" + Sony.GetDescription());
+            Console.WriteLine(Panasonic.pleyer + " 2:\n" + Panasonic.GetDescription());
 
 
             Console.ReadLine();
@@ -47,10 +41,11 @@ namespace GDM.HW4.OOP.Classes.Task1
     }
     class LapTop
     {
-        public string Name;
-        public string Power;
-        public string Memory;
-        public string Waight;
+        public string laptop = "Laptop";
+        protected string Name;
+        protected string Power;
+        protected string Memory;
+        protected string Waight;
 
         public LapTop(string name, int power, int memory, double waight)
         {
@@ -66,10 +61,11 @@ namespace GDM.HW4.OOP.Classes.Task1
     }
     class Server
     {
-        public string Name;
-        public string Power;
-        public string Memory;
-        public int ProcessorQuantity;
+        public string server = "Server";
+        protected string Name;
+        protected string Power;
+        protected string Memory;
+        protected int ProcessorQuantity;
 
         public Server(string name, int power, int memory, int processorQuantity)
         {
@@ -85,10 +81,11 @@ namespace GDM.HW4.OOP.Classes.Task1
     }
     class PlasmTV
     {
-        public string Name;
-        public string Power;
-        public string ScreenDiagonal;
-        public string ScreenResolution;
+        public string plazmTV = "PlasmTV";
+        protected string Name;
+        protected string Power;
+        protected string ScreenDiagonal;
+        protected string ScreenResolution;
 
         public PlasmTV(string name, int power, int screenDiagonal, string screenResolution)
         {
@@ -104,10 +101,11 @@ namespace GDM.HW4.OOP.Classes.Task1
     }
     class LEDTV
     {
-        public string Name;
-        public string Power;
-        public string ScreenDiagonal;
-        public string Frequency;
+        public string ledTV = "LED TV";
+        protected string Name;
+        protected string Power;
+        protected string ScreenDiagonal;
+        protected string Frequency;
 
         public LEDTV(string name, int power, int screenDiagonal, int frequency)
         {
@@ -123,21 +121,20 @@ namespace GDM.HW4.OOP.Classes.Task1
     }
     class PleyerDevice
     {
-        public string Name;
-        public string Power;
-        public string MP3;
-        public string AVC;
+        public string pleyer = "Pleyer Device";
+        protected string Name;
+        protected string Power;
+        protected string KodekSupported;
 
-        public PleyerDevice(string name, int power, bool mp3, bool avc)
+        public PleyerDevice(string name, int power, string kodek)
         {
             Name = name;
             Power = $"{power} W";
-            MP3 = $"{mp3}";
-            AVC = $"{avc}";
+            KodekSupported = $"{kodek}";
         }
         public string GetDescription()
         {
-            return $"  Name: {Name} {Environment.NewLine}  Power: {Power} {Environment.NewLine}  MP3: {MP3} {Environment.NewLine}  AVC: {AVC}";
+            return $"  Name: {Name} {Environment.NewLine}  Power: {Power} {Environment.NewLine}  Supported kodek: {KodekSupported}";
         }
     }
 }

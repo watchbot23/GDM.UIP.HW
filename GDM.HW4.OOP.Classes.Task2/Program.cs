@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace GDM.HW4.OOP.Classes.Task2
 {
     class Program
@@ -13,7 +14,10 @@ namespace GDM.HW4.OOP.Classes.Task2
             Worker anton = new Worker();
             Worker bogdan = new Worker();
             Worker clark = new Worker();
-            string agregat = "Agregat";
+
+            Agregat agregatValue = new Agregat();
+            string agregat = agregatValue.GetAgregatValue();
+            
             int completeAgrigat = 50;
 
             for (int i = 0; agregat.Length < completeAgrigat; i++)
