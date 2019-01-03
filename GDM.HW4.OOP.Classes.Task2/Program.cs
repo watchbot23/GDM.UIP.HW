@@ -11,20 +11,25 @@ namespace GDM.HW4.OOP.Classes.Task2
     {
         static void Main(string[] args)
         {
-            Worker anton = new Worker();
-            Worker bogdan = new Worker();
-            Worker clark = new Worker();
-
+            int workersQuantity = 3;
+            string[] workersNames = new string[3] { "Anton", "Bogdan", "Clark" };//примитивная симуляция базы данных
+            int[] workersXP = new int[3] { 1, 3, 7 };//примитивная симуляция базы данных
+            var workers = new Worker[workersQuantity];
+            for (int i = 0; i < workersQuantity; i++)
+            {
+                workers[i] = new Worker();
+                workers[i].Name = workersNames[i];
+                workers[i].Expirience = workersXP[i];
+            }
             Agregat agregatValue = new Agregat();
             string agregat = agregatValue.GetAgregatValue();
-            
             int completeAgrigat = 50;
 
             for (int i = 0; agregat.Length < completeAgrigat; i++)
             {
-                agregat = anton.JuniorWorker(agregat);
-                agregat = bogdan.MiddleWorker(agregat, completeAgrigat);
-                agregat = clark.SeniorWorker(agregat, completeAgrigat);
+                agregat = workers[0].DoWork(agregat, completeAgrigat, workers[0].Expirience);
+                agregat = workers[1].DoWork(agregat, completeAgrigat, workers[1].Expirience);
+                agregat = workers[2].DoWork(agregat, completeAgrigat, workers[2].Expirience);
                 Console.WriteLine(agregat);
             }
             Console.ReadLine();

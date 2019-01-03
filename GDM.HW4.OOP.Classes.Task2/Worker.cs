@@ -8,31 +8,38 @@ namespace GDM.HW4.OOP.Classes.Task2
 {
     class Worker
     {
-        public string JuniorWorker(string agregat)
+        string[] WorkersXP = new string[3] { "Junior", "Middle", "Senior" };
+        public string Name { get; set; }
+        public int Expirience { get; set; }
+
+        public string DoWork(string agregat, int completeAgrigat, int workersXPYears)
         {
-            return agregat + "a";
-        }
-        public string MiddleWorker(string agregat, int completeAgrigat)
-        {
-            for (int i = 0; i < 3; i++)
+            string tempAgregat = agregat;
+            if (workersXPYears <= 1)
             {
-                if (completeAgrigat - agregat.Length != 0)
+                tempAgregat = tempAgregat + "a";
+            }
+            if (workersXPYears > 1 && workersXPYears < 5)
+            {
+                for (int i = 0; i < 3; i++)
                 {
-                    agregat += "b";
+                    if (completeAgrigat - tempAgregat.Length != 0)
+                    {
+                        tempAgregat = tempAgregat + "b";
+                    }
                 }
             }
-            return agregat;
-        }
-            public string SeniorWorker(string agregat, int completeAgrigat)
-        {
-            for (int i = 0; i < 5; i++)
+            if (workersXPYears >= 5)
             {
-                if (completeAgrigat - agregat.Length != 0)
+                for (int i = 0; i < 5; i++)
                 {
-                    agregat +="c";
+                    if (completeAgrigat - tempAgregat.Length != 0)
+                    {
+                        tempAgregat = tempAgregat + "c";
+                    }
                 }
             }
-            return agregat;
+            return tempAgregat;
         }
     }
 }
