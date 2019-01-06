@@ -10,30 +10,30 @@ namespace GDM.HW4.OOP.Classes.Task1
     {
         static void Main(string[] args)
         {
-            LapTop Acer = new LapTop("Acer", 65, 8, 2.1);
-            LapTop MSI = new LapTop("MSI", 85, 16, 2.9);
-            Console.WriteLine(Acer.laptop + " 1:\n" + Acer.GetDescription());
-            Console.WriteLine(MSI.laptop + " 2:\n" + MSI.GetDescription());
+            LapTop acer = new LapTop("Acer", 65, 8, 2.1);
+            LapTop msi = new LapTop("MSI", 85, 16, 2.9);
+            Console.WriteLine(acer.laptop + " 1:\n" + acer.GetDescription());
+            Console.WriteLine(msi.laptop + " 2:\n" + msi.GetDescription());
 
-            Server Intel = new Server("Intel", 200, 120, 8);
-            Server AMD = new Server("Intel", 300, 140, 12);
-            Console.WriteLine(Intel.server + " 1:\n" + Intel.GetDescription());
-            Console.WriteLine(AMD.server + " 2:\n" + AMD.GetDescription());
+            Server intel = new Server("Intel", 200, 120, 8);
+            Server amd = new Server("Intel", 300, 140, 12);
+            Console.WriteLine(intel.server + " 1:\n" + intel.GetDescription());
+            Console.WriteLine(amd.server + " 2:\n" + amd.GetDescription());
 
-            PlasmTV Samsung = new PlasmTV("Samsung", 300, 32, "1920x1080");
-            PlasmTV LG = new PlasmTV("LG", 500, 50, "3840x2160");
-            Console.WriteLine(Samsung.plazmTV + " 1:\n" + Samsung.GetDescription());
-            Console.WriteLine(LG.plazmTV + " 2:\n" + LG.GetDescription());
+            PlasmTV samsung = new PlasmTV("Samsung", 300, 32, "1920x1080");
+            PlasmTV lg = new PlasmTV("LG", 500, 50, "3840x2160");
+            Console.WriteLine(samsung.plazmTV + " 1:\n" + samsung.GetDescription());
+            Console.WriteLine(lg.plazmTV + " 2:\n" + lg.GetDescription());
 
-            LEDTV Sharp = new LEDTV("Sharp", 350, 40, 60);
-            LEDTV Xiaomi = new LEDTV("Xiaomi", 700, 65, 75);
-            Console.WriteLine(Sharp.ledTV + " 1:\n" + Sharp.GetDescription());
-            Console.WriteLine(Xiaomi.ledTV + " 2:\n" + Xiaomi.GetDescription());
+            LEDTV sharp = new LEDTV("Sharp", 350, 40, 60);
+            LEDTV xiaomi = new LEDTV("Xiaomi", 700, 65, 75);
+            Console.WriteLine(sharp.ledTV + " 1:\n" + sharp.GetDescription());
+            Console.WriteLine(xiaomi.ledTV + " 2:\n" + xiaomi.GetDescription());
 
-            PleyerDevice Sony = new PleyerDevice("Sharp", 350, "MP3, AVC");
-            PleyerDevice Panasonic = new PleyerDevice("Xiaomi", 700, "MP3, Flac");
-            Console.WriteLine(Sony.pleyer + " 1:\n" + Sony.GetDescription());
-            Console.WriteLine(Panasonic.pleyer + " 2:\n" + Panasonic.GetDescription());
+            PlayerDevice sony = new PlayerDevice("Sharp", 350, "MP3, AVC");
+            PlayerDevice panasonic = new PlayerDevice("Xiaomi", 700, "MP3, Flac");
+            Console.WriteLine(sony.player + " 1:\n" + sony.GetDescription());
+            Console.WriteLine(panasonic.player + " 2:\n" + panasonic.GetDescription());
 
 
             Console.ReadLine();
@@ -45,18 +45,18 @@ namespace GDM.HW4.OOP.Classes.Task1
         protected string Name;
         protected string Power;
         protected string Memory;
-        protected string Waight;
+        protected string Weight;
 
-        public LapTop(string name, int power, int memory, double waight)
+        public LapTop(string name, int power, int memory, double weight)
         {
             Name = name;
             Power = $"{power} W";
             Memory = $"{memory} Gb";
-            Waight = $"{waight} Kg";
+            Weight = $"{weight} Kg";
         }
         public string GetDescription()
         {
-            return $"  Name: {Name} {Environment.NewLine}  Power: {Power} {Environment.NewLine}  Memory: {Memory} {Environment.NewLine}  Waight: {Waight}";
+            return $"  Name: {Name} {Environment.NewLine}  Power: {Power} {Environment.NewLine}  Memory: {Memory} {Environment.NewLine}  Waight: {Weight}";
         }
     }
     class Server
@@ -119,14 +119,14 @@ namespace GDM.HW4.OOP.Classes.Task1
             return $"  Name: {Name} {Environment.NewLine}  Power: {Power} {Environment.NewLine}  ScreenDiagonal: {ScreenDiagonal} {Environment.NewLine}  Frequency: {Frequency}";
         }
     }
-    class PleyerDevice
+    class PlayerDevice
     {
-        public string pleyer = "Pleyer Device";
+        public string player = "Pleyer Device";
         protected string Name;
         protected string Power;
         protected string KodekSupported;
 
-        public PleyerDevice(string name, int power, string kodek)
+        public PlayerDevice(string name, int power, string kodek)
         {
             Name = name;
             Power = $"{power} W";

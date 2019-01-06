@@ -13,6 +13,7 @@ namespace GDM.HW4.OOP.Classes.Task3
 
         public string ModelName
         {
+            get { return _name; }
             set
             {
                 if (value.Length < 10)
@@ -24,10 +25,10 @@ namespace GDM.HW4.OOP.Classes.Task3
                     _name = value;
                 }
             }
-            get { return _name; }
         }
         public int Price
         {
+            get { return _price; }
             set
             {
                 if (value < 0 && value > 100000)
@@ -39,7 +40,6 @@ namespace GDM.HW4.OOP.Classes.Task3
                     _price = value;
                 }
             }
-            get { return _price; }
         }
     }
 }

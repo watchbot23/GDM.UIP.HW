@@ -8,17 +8,17 @@ namespace GDM.HW4.OOP.Classes.Task3
 {
     public class MobileStore
     {
-        private string _capasity;
-        private int _address;
+        private int _capasity;
+        private string _address;
 
-        public string Capasity
+        public int Capasity
         {
             get { return _capasity; }
             set
             {
-                if (value.Length < 1)
+                if (value < 1 && value > 10)
                 {
-                    Console.WriteLine("Please write valid (not empty) name for store");
+                    Console.WriteLine("Please write capasity (number > 1 && number <= 10) of phones which could be in store");
                 }
                 else
                 {
@@ -26,11 +26,11 @@ namespace GDM.HW4.OOP.Classes.Task3
                 }
             }
         }
-        public int Address
+        public string Address
         {
             set
             {
-                if (value < 0 && value > 100000)
+                if (value.Length < 10)
                 {
                     Console.WriteLine("Please write shop address (text with length > 10) of stores");
                 }
