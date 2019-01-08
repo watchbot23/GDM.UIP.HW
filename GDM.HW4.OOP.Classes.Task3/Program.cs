@@ -95,7 +95,7 @@ namespace GDM.HW4.OOP.Classes.Task3
             Console.WriteLine($"Please write valid (number > 0 && number <= 10) number of stores for shop '{_shop.ShopName}'.");
             string storesNumber = Console.ReadLine();
             int tempNumberNumeric;
-            if (IsDigitsOnly(storesNumber) != true)
+            if (IsDigitsOnly(storesNumber) || storesNumber == "")
             {
                 SetNumberOfStores();
             }
@@ -119,7 +119,7 @@ namespace GDM.HW4.OOP.Classes.Task3
             for (int i = 0; i < _mobStore.Length; i++)
             {
                 string storeCellStatus = "";
-                if (IsObjectInArrayNull(_mobStore, i) == true)
+                if (IsObjectInArrayNull(_mobStore, i))
                 {
                     storeCellStatus = "Store cell is empty";
                     Console.WriteLine($"[{i}] - {storeCellStatus}");
@@ -130,7 +130,7 @@ namespace GDM.HW4.OOP.Classes.Task3
                     for (int j = 0; j < _mobStore[i].Capasity; j++)
                     {
                         string phoneCellStatus = "";
-                        if (IsObjectInArraysArrayNull(_phone, i, j) == true)
+                        if (IsObjectInArraysArrayNull(_phone, i, j))
                         {
                             phoneCellStatus = "Phone cell is empty";
                             Console.WriteLine($"   [{j}] - {phoneCellStatus}");
@@ -178,9 +178,9 @@ namespace GDM.HW4.OOP.Classes.Task3
         }
         public static void SetStoreCapasity()
         {
-            Console.WriteLine("Please write capasity (number > 1 && number <= 10) of phones which could be in store");
+            Console.WriteLine("Please write capasity (number > 0 && number <= 10) of phones which could be in store");
             string phonesQuantityInStore = Console.ReadLine();
-            if (IsDigitsOnly(phonesQuantityInStore) == false)
+            if (IsDigitsOnly(phonesQuantityInStore))
             {
                 SetStoreCapasity();
             }
@@ -213,7 +213,7 @@ namespace GDM.HW4.OOP.Classes.Task3
             string phonePrice;
             for (int i = 0; i < _mobStore.Length;)
             {
-                if (IsObjectInArrayNull(_mobStore, i) == true)
+                if (IsObjectInArrayNull(_mobStore, i))
                 {
                     Console.WriteLine($"-> In '{_shop.ShopName}' no real stores are available. Please add any real store before adding a phone.");
                     ConsoleOptionMenu();
@@ -223,9 +223,9 @@ namespace GDM.HW4.OOP.Classes.Task3
             storeIndex = SelectStoreIndexToPutPhone();
             for (int i = storeIndex; i == storeIndex; i++)
             {
-                for (int j = 0; j < _mobStore[i].Capasity; j++)
+                for (int j = 0; j < _mobStore[i].Capasity; )
                 {
-                    if (IsObjectInArraysArrayNull(_phone, i, j) == true && i == storeIndex)
+                    if (IsObjectInArraysArrayNull(_phone, i, j) && i == storeIndex)
                     {
                         _phone[i][j] = new Phone();
                         Console.WriteLine($"Please write phone model name text with length > 10");
@@ -238,7 +238,11 @@ namespace GDM.HW4.OOP.Classes.Task3
                         _phone[i][j].ModelName = modelName;
                         break;
                     }
-                    if (j > _mobStore[i].Capasity - 1 || IsObjectInArraysArrayNull(_phone, i, j) != true)
+                    if (IsObjectInArraysArrayNull(_phone, i, j) && j < _mobStore[i].Capasity)
+                    {
+                        j++;
+                    }
+                    if (j > _mobStore[i].Capasity - 1)
                     {
                         Console.WriteLine($"-> There is no free cells in shop with address '{_mobStore[i].Address}' and capasity '{_mobStore[i].Capasity}'." +
                             $"\nPlease select another existing store or create a new one.");
@@ -250,17 +254,17 @@ namespace GDM.HW4.OOP.Classes.Task3
             {
                 for (int j = 0; j < _mobStore[i].Capasity; j++)
                 {
-                    if (IsObjectInArraysArrayNull(_phone, i, j) != true && i == storeIndex && _phone[i][j].Price == 0)
+                    if (IsObjectInArraysArrayNull(_phone, i, j) && i == storeIndex && _phone[i][j].Price == 0)
                     {
                         Console.WriteLine($"Please write price (number > 0 && number <= 100000) of phones which could be in store");
                         phonePrice = Console.ReadLine();
-                        while (IsDigitsOnly(phonePrice) == false)
+                        while (IsDigitsOnly(phonePrice))
                         {
                             Console.WriteLine($"-> Invalid price. Please make sure you enter a correct price (number > 0 && number <= 100000).");
                             phonePrice = Console.ReadLine();
                         }
                         int phonePriceNumeric = Int32.Parse(phonePrice);
-                        while (IsDigitsOnly(phonePrice) == false || phonePriceNumeric < 1 || phonePriceNumeric > 100000)
+                        while (IsDigitsOnly(phonePrice) || phonePriceNumeric < 1 || phonePriceNumeric > 100000)
                         {
                             Console.WriteLine($"-> Invalid price. Please make sure you enter a correct price (number > 0 && number <= 100000).");
                             phonePrice = Console.ReadLine();
@@ -289,7 +293,7 @@ namespace GDM.HW4.OOP.Classes.Task3
                 }
             }
             string storeIndex = Console.ReadLine();
-            while (IsDigitsOnly(storeIndex) == false)
+            while (IsDigitsOnly(storeIndex))
             {
                 Console.WriteLine($"-> Invalid index. Please make sure you enter a correct index.");
                 Console.WriteLine("Please write index number of Mobile Phone Store below. MobilePhoneStores:");
