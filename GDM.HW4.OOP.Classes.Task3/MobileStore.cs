@@ -8,12 +8,12 @@ namespace GDM.HW4.OOP.Classes.Task3
 {
     public class MobileStore
     {
-        private int _capasity;
+        private int _capascity;
         private string _address;
 
-        public int Capasity
+        public int Capacity
         {
-            get { return _capasity; }
+            get { return _capascity; }
             set
             {
                 if (value < 1 && value > 10)
@@ -22,7 +22,7 @@ namespace GDM.HW4.OOP.Classes.Task3
                 }
                 else
                 {
-                    _capasity = value;
+                    _capascity = value;
                 }
             }
         }

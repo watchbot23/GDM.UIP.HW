@@ -8,20 +8,18 @@ namespace GDM.HW4.OOP.Classes.Task3
 {
     class Program
     {
-        private static Shop _shop;
-        private static MobileStore[] _mobStore;
-        private static Phone[][] _phone;
         static void Main(string[] args)
         {
-            SetShopName();
-            SetNumberOfStores();
-            _mobStore = new MobileStore[_shop.NumberOfStores];
-            _phone = new Phone[_shop.NumberOfStores][];
-            ConsoleOptionMenu();
+            Shop shop = new Shop();
+            SetShopName(shop);
+            SetNumberOfStores(shop);
+            MobileStore[] mobStore = new MobileStore[shop.NumberOfStores];
+            Phone[][] phone = new Phone[shop.NumberOfStores][];
+            MainProgramm(shop, mobStore, phone);
 
             Console.ReadLine();
         }
-        public static void ConsoleOptionMenu ()
+        public static void ConsoleOptionsMenu()
         {
             Console.WriteLine("- - - - - NEW COMMAND - - - - -");
             Console.WriteLine("Please write index of command from list below. Commands: " +
@@ -30,204 +28,157 @@ namespace GDM.HW4.OOP.Classes.Task3
                 "\n [2] - add phone to store " +
                 "\n [3] - show all phones in store " +
                 "\n [4] - clear console");
-
-            string response = "";
-            response = Console.ReadLine();
-            if (response == "")
+        }
+        public static void MainProgramm (Shop shop, MobileStore[] mobStore, Phone[][] phone)
+        {
+            ConsoleOptionsMenu();
+            string response = Console.ReadLine();
+            switch (response)
             {
-                Console.WriteLine("Invalid command");
-                ConsoleOptionMenu();
-            }
-            while (response != "")
-            {
-                switch (response)
-                {
-                    case "0":
-                        Environment.Exit(0);
-                        break;
+                case "0":
+                    Environment.Exit(0);
+                    break;
 
-                    case "1":
-                        SetNewStoreAddress();
-                        SetStoreCapasity();
-                        ConsoleOptionMenu();
-                        break;
+                case "1":
+                    SetNewStoreAddress(mobStore);
+                    SetStoreCapacity(mobStore, phone);
+                    MainProgramm(shop, mobStore, phone);
+                    break;
 
-                    case "2":
-                        SetNewPhoneModelNameAndPrice();
-                        ConsoleOptionMenu();
-                        break;
+                case "2":
+                    SetNewPhoneModelNameAndPrice(shop, mobStore, phone);
+                    MainProgramm(shop, mobStore, phone);
+                    break;
 
-                    case "3":
-                        GetPhonesInStore();
-                        ConsoleOptionMenu();
-                        break;
+                case "3":
+                    GetPhonesInStore(shop, mobStore, phone);
+                    MainProgramm(shop, mobStore, phone);
+                    break;
 
-                    case "4":
-                        Console.Clear();
-                        ConsoleOptionMenu();
-                        break;
+                case "4":
+                    Console.Clear();
+                    MainProgramm(shop, mobStore, phone);
+                    break;
 
-                    default:
-                        Console.WriteLine("-> Invalid command");
-                        ConsoleOptionMenu();
-                        break;
-                }
+                default:
+                    Console.WriteLine("-> Invalid command");
+                    MainProgramm(shop, mobStore, phone);
+                    response = Console.ReadLine();
+                    break;
             }
          }
-        public static void SetShopName()
+        public static void SetShopName(Shop shop)
         {
-            Console.WriteLine("Please write valid (not empty) name for shop");
-            string shopName = Console.ReadLine();
-            _shop = new Shop();
-
-            if (shopName.Length < 1)
+            string shopName;
+            do
             {
-                SetShopName();
+                Console.WriteLine("Please write valid (not empty) name for shop");
+                shopName = Console.ReadLine();
             }
-            else
-            {
-                _shop.ShopName = shopName;
-                Console.WriteLine($"-> Great, the name of shop is '{_shop.ShopName}'");
-            }
+            while (shopName.Length < 1);
+            shop.ShopName = shopName;
+            Console.WriteLine($"-> Great, the name of shop is '{shop.ShopName}'");
         }
-        public static void SetNumberOfStores()
+        public static void SetNumberOfStores(Shop shop)
         {
-            Console.WriteLine($"Please write valid (number > 0 && number <= 10) number of stores for shop '{_shop.ShopName}'.");
-            string storesNumber = Console.ReadLine();
+            string storesNumber;
             int tempNumberNumeric;
-            if (IsDigitsOnly(storesNumber) || storesNumber == "")
+            do
             {
-                SetNumberOfStores();
+                Console.WriteLine($"Please write valid (number > 0 && number <= 10) number of stores for shop '{shop.ShopName}'.");
+                storesNumber = Console.ReadLine();
             }
-            else
-            {
-                tempNumberNumeric = Int32.Parse(storesNumber);
-                if (tempNumberNumeric < 1 || tempNumberNumeric > 10)
-                {
-                    SetNumberOfStores();
-                }
-                else
-                {
-                    _shop.NumberOfStores = tempNumberNumeric;
-                    Console.WriteLine($"-> Great, the number of stores in shop '{_shop.ShopName}' is '{_shop.NumberOfStores}'.");
-                }
-            }
+            while (!Int32.TryParse(storesNumber, out tempNumberNumeric) || tempNumberNumeric < 1 || tempNumberNumeric > 10);
+            shop.NumberOfStores = tempNumberNumeric;
+            Console.WriteLine($"-> Great, the number of stores in shop '{shop.ShopName}' is '{shop.NumberOfStores}'.");
         }
-        public static void GetPhonesInStore()
+        public static void GetPhonesInStore(Shop shop, MobileStore[] mobStore, Phone[][] phone)
         {
-            Console.WriteLine($"-> Store in ''{_shop.ShopName}'' ");
-            for (int i = 0; i < _mobStore.Length; i++)
+            Console.WriteLine($"-> Store in ''{shop.ShopName}'' ");
+            for (int i = 0; i < mobStore.Length; i++)
             {
-                string storeCellStatus = "";
-                if (IsObjectInArrayNull(_mobStore, i))
+                if (IsObjectInArrayNull(mobStore, i))
                 {
-                    storeCellStatus = "Store cell is empty";
-                    Console.WriteLine($"[{i}] - {storeCellStatus}");
+                    Console.WriteLine($"[{i}] - Store cell is empty");
                 }
                 else
                 {
-                    Console.WriteLine($"[{i}] - Store cell is with address '{_mobStore[i].Address}' and capasity '{_mobStore[i].Capasity}'");
-                    for (int j = 0; j < _mobStore[i].Capasity; j++)
+                    Console.WriteLine($"[{i}] - Store cell is with address '{mobStore[i].Address}' and Capacity '{mobStore[i].Capacity}'");
+                    for (int j = 0; j < mobStore[i].Capacity; j++)
                     {
-                        string phoneCellStatus = "";
-                        if (IsObjectInArraysArrayNull(_phone, i, j))
+                        if (IsObjectInArraysArrayNull(phone, i, j))
                         {
-                            phoneCellStatus = "Phone cell is empty";
-                            Console.WriteLine($"   [{j}] - {phoneCellStatus}");
+                            Console.WriteLine($"   [{j}] - Phone cell is empty");
                         }
                         else
                         {
-                            Console.WriteLine($"   [{j}] - Phone cell is with model '{_phone[i][j].ModelName}' and price '{_phone[i][j].Price} UAH'");
+                            Console.WriteLine($"   [{j}] - Phone cell is with model '{phone[i][j].ModelName}' and price '{phone[i][j].Price} UAH'");
                         }
                     }
                 }
             }
         }
-        public static void SetNewStoreAddress()
+        public static void SetNewStoreAddress(MobileStore[] mobStore)
         {
-            Console.WriteLine("Please write shop address (text with length > 10) of stores");
-            string storeAddress = Console.ReadLine();
-            if (storeAddress.Length <= 10)
+            string storeAddress;
+            do
             {
-                SetNewStoreAddress();
+                Console.WriteLine("Please write shop address (text with length > 10) of stores");
+                storeAddress = Console.ReadLine();
             }
-            else
+            while (storeAddress.Length <= 10);
+            for (int i = 0; i < mobStore.Length; i++)
             {
-                for (int i = 0; i < _mobStore.Length; i++)
+                if (IsObjectInArrayNull(mobStore, i))
                 {
-                    if (_mobStore[i] == null)
+                    mobStore[i] = new MobileStore { Address = storeAddress };
+                    break;
+                }
+            }
+        }
+        public static void SetStoreCapacity(MobileStore[] mobStore, Phone[][] phone)
+        {
+            string phonesQuantityInStore;
+            int phonesQuantityInStoreNumeric;
+            do
+            {
+                Console.WriteLine("Please write Capacity (number > 0 && number <= 10) of phones which could be in store");
+                phonesQuantityInStore = Console.ReadLine();
+            }
+            while (!Int32.TryParse(phonesQuantityInStore, out phonesQuantityInStoreNumeric) || phonesQuantityInStoreNumeric < 1 || phonesQuantityInStoreNumeric > 10);
+            for (int i = 0; i < mobStore.Length; i++)
+            {
+                    if (!IsObjectInArrayNull(mobStore, i) && mobStore[i].Capacity == 0)
                     {
-                        _mobStore[i] = new MobileStore {
-                            Address = storeAddress };
+                        mobStore[i].Capacity = phonesQuantityInStoreNumeric;
+                        phone[i] = new Phone[mobStore[i].Capacity];
+                        Console.WriteLine($"-> Shop with address '{mobStore[i].Address}' and Capacity '{mobStore[i].Capacity}' successfully created.");
                         break;
                     }
                 }
-            }
         }
-        public static bool IsDigitsOnly(string consoleString)
-        {
-            bool tempBool = true;
-            foreach (char c in consoleString)
-            {
-                if (c < '0' || c > '9' || consoleString.Length > 8)
-                {
-                    tempBool = false;
-                }
-            }
-            return tempBool;
-        }
-        public static void SetStoreCapasity()
-        {
-            Console.WriteLine("Please write capasity (number > 0 && number <= 10) of phones which could be in store");
-            string phonesQuantityInStore = Console.ReadLine();
-            if (IsDigitsOnly(phonesQuantityInStore))
-            {
-                SetStoreCapasity();
-            }
-            else
-            {
-                int phonesQuantityInStoreNumeric = Int32.Parse(phonesQuantityInStore);
-                if (phonesQuantityInStoreNumeric < 1 || phonesQuantityInStoreNumeric > 10)
-                {
-                    SetStoreCapasity();
-                }
-                else
-                {
-                    for (int i = 0; i < _mobStore.Length; i++)
-                    {
-                        if (_mobStore[i] != null && _mobStore[i].Capasity == 0)
-                        {
-                            _mobStore[i].Capasity = phonesQuantityInStoreNumeric;
-                            _phone[i] = new Phone[_mobStore[i].Capasity];
-                            Console.WriteLine($"-> Shop with address '{_mobStore[i].Address}' and capasity '{_mobStore[i].Capasity}' successfully created.");
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        public static void SetNewPhoneModelNameAndPrice()
+        public static void SetNewPhoneModelNameAndPrice(Shop shop, MobileStore[] mobStore, Phone[][] phone)
         {
             int storeIndex;
             string modelName;
             string phonePrice;
-            for (int i = 0; i < _mobStore.Length;)
+            for (int i = 0; i < mobStore.Length;)
             {
-                if (IsObjectInArrayNull(_mobStore, i))
+                if (IsObjectInArrayNull(mobStore, i))
                 {
-                    Console.WriteLine($"-> In '{_shop.ShopName}' no real stores are available. Please add any real store before adding a phone.");
-                    ConsoleOptionMenu();
+                    Console.WriteLine($"-> In '{shop.ShopName}' no real stores are available. Please add any real store before adding a phone.");
+                    MainProgramm(shop, mobStore, phone);
                 }
                 break;
             }
-            storeIndex = SelectStoreIndexToPutPhone();
+            storeIndex = SelectStoreIndexToPutPhone(shop, mobStore, phone);
             for (int i = storeIndex; i == storeIndex; i++)
             {
-                for (int j = 0; j < _mobStore[i].Capasity; )
+                for (int j = 0; j < mobStore[i].Capacity; )
                 {
-                    if (IsObjectInArraysArrayNull(_phone, i, j) && i == storeIndex)
+                    if (IsObjectInArraysArrayNull(phone, i, j) && i == storeIndex)
                     {
-                        _phone[i][j] = new Phone();
+                        phone[i][j] = new Phone();
                         Console.WriteLine($"Please write phone model name text with length > 10");
                         modelName = Console.ReadLine();
                         while (modelName.Length <= 10)
@@ -235,57 +186,52 @@ namespace GDM.HW4.OOP.Classes.Task3
                             Console.WriteLine($"Please write phone model name text with length > 10");
                             modelName = Console.ReadLine();
                         }
-                        _phone[i][j].ModelName = modelName;
+                        phone[i][j].ModelName = modelName;
                         break;
                     }
-                    if (IsObjectInArraysArrayNull(_phone, i, j) && j < _mobStore[i].Capasity)
+                    if (!IsObjectInArraysArrayNull(phone, i, j) && j < mobStore[i].Capacity)
                     {
                         j++;
                     }
-                    if (j > _mobStore[i].Capasity - 1)
+                    if (j > mobStore[i].Capacity - 1)
                     {
-                        Console.WriteLine($"-> There is no free cells in shop with address '{_mobStore[i].Address}' and capasity '{_mobStore[i].Capasity}'." +
+                        Console.WriteLine($"-> There is no free cells in shop with address '{mobStore[i].Address}' and Capacity '{mobStore[i].Capacity}'." +
                             $"\nPlease select another existing store or create a new one.");
-                        ConsoleOptionMenu();
+                        MainProgramm(shop, mobStore, phone);
                     }
                 }
             }
             for (int i = storeIndex; i == storeIndex; i++)
             {
-                for (int j = 0; j < _mobStore[i].Capasity; j++)
+                for (int j = 0; j < mobStore[i].Capacity; j++)
                 {
-                    if (IsObjectInArraysArrayNull(_phone, i, j) && i == storeIndex && _phone[i][j].Price == 0)
+                    if (!IsObjectInArraysArrayNull(phone, i, j) && i == storeIndex && phone[i][j].Price == 0)
                     {
                         Console.WriteLine($"Please write price (number > 0 && number <= 100000) of phones which could be in store");
                         phonePrice = Console.ReadLine();
-                        while (IsDigitsOnly(phonePrice))
+                        int phonePriceNumeric;
+                        while (!Int32.TryParse(phonePrice, out phonePriceNumeric) || string.IsNullOrWhiteSpace(phonePrice) || phonePriceNumeric < 1 || phonePriceNumeric > 100000)
                         {
                             Console.WriteLine($"-> Invalid price. Please make sure you enter a correct price (number > 0 && number <= 100000).");
                             phonePrice = Console.ReadLine();
                         }
-                        int phonePriceNumeric = Int32.Parse(phonePrice);
-                        while (IsDigitsOnly(phonePrice) || phonePriceNumeric < 1 || phonePriceNumeric > 100000)
-                        {
-                            Console.WriteLine($"-> Invalid price. Please make sure you enter a correct price (number > 0 && number <= 100000).");
-                            phonePrice = Console.ReadLine();
-                        }
-                        _phone[i][j].Price = phonePriceNumeric;
-                        Console.WriteLine($"-> Phone with model Name '{_phone[i][j].ModelName}' and price '{_phone[i][j].Price}' successfully " +
-                            $"\nadded to store with address '{_mobStore[storeIndex].Address}' and capasity '{_mobStore[storeIndex].Capasity}' ");
+                        phone[i][j].Price = phonePriceNumeric;
+                        Console.WriteLine($"-> Phone with model Name '{phone[i][j].ModelName}' and price '{phone[i][j].Price}' successfully " +
+                            $"\nadded to store with address '{mobStore[storeIndex].Address}' and Capacity '{mobStore[storeIndex].Capacity}' ");
                         break;
                     }
                 }
             }
         }
-        public static int SelectStoreIndexToPutPhone ()
+        public static int SelectStoreIndexToPutPhone (Shop shop, MobileStore[] mobStore, Phone[][] phone)
         {
             Console.WriteLine("Please write index number of Mobile Phone Store below. MobilePhoneStores:");
-            int index = _mobStore.Length - 1;
-            for (int i = 0; i < _mobStore.Length; i++)
+            int index = mobStore.Length - 1;
+            for (int i = 0; i < mobStore.Length; i++)
             {
-                if (_mobStore[i] != null)
+                if (!IsObjectInArrayNull(mobStore, i))
                 {
-                    Console.WriteLine($" [{i}] - Store cell is with address '{_mobStore[i].Address}' and capasity '{_mobStore[i].Capasity}'");
+                    Console.WriteLine($" [{i}] - Store cell is with address '{mobStore[i].Address}' and Capacity '{mobStore[i].Capacity}'");
                 }
                 else
                 {
@@ -293,15 +239,16 @@ namespace GDM.HW4.OOP.Classes.Task3
                 }
             }
             string storeIndex = Console.ReadLine();
-            while (IsDigitsOnly(storeIndex))
+            int storeIndexNumeric;
+            while (!Int32.TryParse(storeIndex, out storeIndexNumeric))
             {
                 Console.WriteLine($"-> Invalid index. Please make sure you enter a correct index.");
                 Console.WriteLine("Please write index number of Mobile Phone Store below. MobilePhoneStores:");
-                for (int i = 0; i < _mobStore.Length; i++)
+                for (int i = 0; i < mobStore.Length; i++)
                 {
-                    if (_mobStore[i] != null)
+                    if (!IsObjectInArrayNull(mobStore, i))
                     {
-                        Console.WriteLine($" [{i}] - Store cell is with address '{_mobStore[i].Address}' and capasity '{_mobStore[i].Capasity}'");
+                        Console.WriteLine($" [{i}] - Store cell is with address '{mobStore[i].Address}' and Capacity '{mobStore[i].Capacity}'");
                     }
                     else
                     {
@@ -310,17 +257,16 @@ namespace GDM.HW4.OOP.Classes.Task3
                 }
                 storeIndex = Console.ReadLine();
             }
-            int storeIndexNumeric = Int32.Parse(storeIndex);
-            index = IndexOfEmptyCellInStore(_mobStore);
-            if (storeIndexNumeric > index && storeIndexNumeric < _mobStore.Length)
+            index = IndexOfEmptyCellInStore(mobStore);
+            if (IsObjectInArrayNull(mobStore, storeIndexNumeric) && storeIndexNumeric < mobStore.Length)
             {
-                Console.WriteLine($"-> Store with index [{storeIndexNumeric}] in shop {_shop.ShopName} does not exist yet");
-                SelectStoreIndexToPutPhone();
+                Console.WriteLine($"-> Store with index [{storeIndexNumeric}] in shop {shop.ShopName} does not exist yet");
+                SelectStoreIndexToPutPhone(shop, mobStore, phone);
             }
-            else if (storeIndexNumeric < 0 || storeIndexNumeric > _mobStore.Length - 1)
+            else if (storeIndexNumeric < 0 || storeIndexNumeric > mobStore.Length - 1)
             {
                 Console.WriteLine($"-> Invalid index. Please make sure you enter a correct index.");
-                SelectStoreIndexToPutPhone();
+                SelectStoreIndexToPutPhone(shop, mobStore, phone);
             }
             else
             {
@@ -339,37 +285,37 @@ namespace GDM.HW4.OOP.Classes.Task3
                     break;
                 }
             }
-            return index - 1;
+            return index;
         }
         public static bool IsObjectInArrayNull (MobileStore[] array, int index)
         {
-            bool tempBool = false;
-            for (int i = index; i == index;)
+            bool isObjectInArrayNull = false;
+            for (int i = index; i == index && i < array.Length;)
             {
                 if (array[i] == null)
                 {
-                    tempBool = true;
+                    isObjectInArrayNull = true;
                 }
                 break;
             }
-            return tempBool;
+            return isObjectInArrayNull;
         }
         public static bool IsObjectInArraysArrayNull (Phone[][] array, int indexI, int indexJ)
         {
-            bool tempBool = false;
+            bool isObjectInArraysArrayNull = false;
             for (int i = indexI; i == indexI;)
             {
                 for (int j = indexJ; j == indexJ;)
                 {
                     if (array[i][j] == null)
                     {
-                        tempBool = true;
+                        isObjectInArraysArrayNull = true;
                     }
                     break;
                 }
                 break;
             }
-            return tempBool;
+            return isObjectInArraysArrayNull;
         }
     }
 }
