@@ -10,7 +10,6 @@ namespace GDM.HW4.OOP.Classes.Task3
     {
         private int _capascity;
         private string _address;
-
         public int Capacity
         {
             get { return _capascity; }
@@ -41,5 +40,6 @@ namespace GDM.HW4.OOP.Classes.Task3
             }
             get { return _address; }
         }
+        public Phone[] PhonesArraysArray { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GDM.HW4.OOP.Classes.Task3
 {
-    class Phone
+    public class Phone
     {
         private string _name;
         private int _price;
