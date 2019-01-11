@@ -70,6 +70,61 @@ namespace GDM.HW4.OOP.Classes.Task3
             NumberOfStores = tempNumberNumeric;
             Console.WriteLine($"-> Great, the number of stores in shop '{ShopName}' is '{NumberOfStores}'.");
         }
-
+        public void GetPhonesInStore(Shop shop)
+        {
+            Console.WriteLine($"-> Store in ''{shop.ShopName}'' ");
+            for (int i = 0; i < shop.MobStoresArray.Length; i++)
+            {
+                if (IsObjectInArrayNull(shop.MobStoresArray, i))
+                {
+                    Console.WriteLine($"[{i}] - Store cell is empty");
+                }
+                else
+                {
+                    Console.WriteLine($"[{i}] - Store cell is with address '{shop.MobStoresArray[i].Address}' and Capacity '{shop.MobStoresArray[i].Capacity}'");
+                    for (int j = 0; j < shop.MobStoresArray[i].Capacity; j++)
+                    {
+                        if (IsObjectInArraysArrayNull(shop.MobStoresArray[i].PhonesArraysArray, i, j))
+                        {
+                            Console.WriteLine($"   [{j}] - Phone cell is empty");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"   [{j}] - Phone cell is with model '{shop.MobStoresArray[i].PhonesArraysArray[j].ModelName}' and price '{shop.MobStoresArray[i].PhonesArraysArray[j].Price} UAH'");
+                        }
+                    }
+                }
+            }
+        }
+        public bool IsObjectInArrayNull(MobileStore[] array, int index)
+        {
+            bool isObjectInArrayNull = false;
+            for (int i = index; i == index && i < array.Length;)
+            {
+                if (array[i] == null)
+                {
+                    isObjectInArrayNull = true;
+                }
+                break;
+            }
+            return isObjectInArrayNull;
+        }
+        public bool IsObjectInArraysArrayNull(Phone[] array, int indexI, int indexJ)
+        {
+            bool isObjectInArraysArrayNull = false;
+            for (int i = indexI; i == indexI;)
+            {
+                for (int j = indexJ; j == indexJ;)
+                {
+                    if (array[j] == null)
+                    {
+                        isObjectInArraysArrayNull = true;
+                    }
+                    break;
+                }
+                break;
+            }
+            return isObjectInArraysArrayNull;
+        }
     }
 }
