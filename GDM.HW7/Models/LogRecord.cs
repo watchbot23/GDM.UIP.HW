@@ -8,7 +8,7 @@ namespace GDM.HW7.Models
 {
     public class LogRecord
     {
-        public static int Id { get; set; }
+        private static int Id { get; set; }
 
         public string Message { get; set; }
 

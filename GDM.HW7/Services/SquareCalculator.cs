@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GDM.HW7.Services
 {
-    public class SquareCalculator
+    public class SquareCalculator 
     {
         private long CalculateArea(IList<Point> points, bool isAltAppr)
         {
@@ -34,13 +34,15 @@ namespace GDM.HW7.Services
             return result;
         }
 
-        public void CalculatedLandSquare(IList<Point> points, Logger logger)
+        public void CalculateLandSquare(IList<Point> points, Logger logger)
         {
-            if (CalculateArea(points, true) == CalculateArea(points, false) && points.Count > 2)
+            logger.Info($"Starting square calculating");
+            long resX = CalculateArea(points, true);
+            long resY = CalculateArea(points, false);
+            if (resX == resY && resX != 0 && points.Count > 2)
             {
-                long res = CalculateArea(points, true);
-                Console.WriteLine($"Square is {res}");
-                logger.Info($"Square was calculated");
+                Console.WriteLine($"Square is {resX}");
+                logger.Info($"Square was calculated: {resX}");
             }
             else
             {

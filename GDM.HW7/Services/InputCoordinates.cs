@@ -9,16 +9,9 @@ namespace GDM.HW7.Services
 {
     class InputCoordinates
     {
-        SquareCalculator calc = new SquareCalculator();
-
         public IList<Point> Points = new List<Point>();
 
-        public void AddPointToList(Point point)
-        {
-            Points.Add(point);
-        }
-
-        public void TypeCoordinates(Logger logger)
+        public void InputCoordinate(Logger logger)
         {
             string coordinateX = "";
 
@@ -44,13 +37,12 @@ namespace GDM.HW7.Services
                     coordinateY = Console.ReadLine();
                 } while (!Int32.TryParse(coordinateY, out coordinateYNumeric));
 
-                AddPointToList(new Point(coordinateXNumeric, coordinateYNumeric));
+                Points.Add(new Point(coordinateXNumeric, coordinateYNumeric));
                 logger.Info($"Created point with coordinates ({coordinateXNumeric},{coordinateYNumeric})");
 
                 Console.WriteLine("Have you entered all coordinates? Type 'y' for Yes or 'n' for No:");
                 isDone = Console.ReadLine();
             }
-            calc.CalculatedLandSquare(Points, logger);
         }
 
         public IList<Point> GetPoints()

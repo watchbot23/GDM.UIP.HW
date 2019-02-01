@@ -13,6 +13,7 @@ namespace GDM.HW7
     {
         static void Main(string[] args)
         {
+            SquareCalculator calc = new SquareCalculator();
             InputCoordinates prog = new InputCoordinates();
 
             string path = @"C:\Users\guzhvad\Downloads\Guzhva\C Sharp\Log.txt";
@@ -25,7 +26,8 @@ namespace GDM.HW7
 
             logger.LogLevel = Models.LogLevel.Info;
 
-            prog.TypeCoordinates(logger);
+            prog.InputCoordinate(logger);
+            calc.CalculateLandSquare(prog.GetPoints(), logger);
 
             Console.ReadLine();
 
