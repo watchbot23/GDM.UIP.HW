@@ -36,11 +36,11 @@ namespace GDM.HW7.Services
 
         public void CalculateLandSquare(IList<Point> points, Logger logger)
         {
-            logger.Info($"Starting square calculating");
             long resX = CalculateArea(points, true);
             long resY = CalculateArea(points, false);
-            if (resX == resY && resX != 0 && points.Count > 2)
+            if (points.Count > 2 && resX == resY && resX != 0)
             {
+                logger.Info($"Starting square calculating");
                 Console.WriteLine($"Square is {resX}");
                 logger.Info($"Square was calculated: {resX}");
             }

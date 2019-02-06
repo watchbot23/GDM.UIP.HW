@@ -21,23 +21,33 @@ namespace GDM.HW7.Services
 
         public void Info(string message)
         {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             AddMessage(message, LogLevel.Info);
+            Console.ResetColor();
         }
         public void Warn(string message)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             AddMessage(message, LogLevel.Warn);
+            Console.ResetColor();
         }
         public void Error(string message)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             AddMessage(message, LogLevel.Error);
+            Console.ResetColor();
         }
         public void Debug(string message)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             AddMessage(message, LogLevel.Debug);
+            Console.ResetColor();
         }
         public void Fatal(string message)
         {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             AddMessage(message, LogLevel.Fatal);
+            Console.ResetColor();
         }
 
         public void AddMessage(string message, LogLevel logLevel)
